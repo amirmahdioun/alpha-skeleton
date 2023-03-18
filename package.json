@@ -1,9 +1,10 @@
 {
-  "name": "alpha-skeleton",
-  "version": "0.0.1",
+  "name": "@alphamike/skeleton",
+  "version": "1.0.0",
   "description": "The skeleton app to show when the contents are loading to hint user \"hey!, something should be here and will be load as soon as possible. Expect it",
   "main": "build/index.js",
   "module": "build/index.es.js",
+  "types": "build/index.d.ts",
   "files": [
     "build"
   ],
@@ -11,37 +12,59 @@
   "author": "Amir hossein Mahdioun",
   "license": "MIT",
   "scripts": {
-    "build": "rollup -c",
-    "storybook": "start-storybook -p 6006",
-    "storybook:export": "build-storybook",
-    "prepublishOnly": "npm run build"
+    "build": "rollup --bundleConfigAsCjs -c",
+    "prepublishOnly": "npm run lint:fix && npm run format && npm run build",
+    "publish": "npm publish",
+    "preversion": "npm version patch",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix",
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\""
   },
   "devDependencies": {
-    "@babel/core": "^7.21.0",
+    "@babel/core": "^7.21.3",
     "@rollup/plugin-commonjs": "^24.0.1",
     "@rollup/plugin-node-resolve": "^15.0.1",
-    "@storybook/react": "^6.5.16",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
-    "@types/jest": "^29.4.0",
+    "@types/jest": "^29.5.0",
     "@types/react": "^18.0.28",
-    "babel-loader": "^9.1.2",
-    "babel-preset-react-app": "^10.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.55.0",
+    "@typescript-eslint/parser": "^5.55.0",
+    "babel-loader": "^8.3.0",
+    "eslint": "^8.36.0",
+    "eslint-config-prettier": "^8.7.0",
+    "eslint-plugin-storybook": "^0.6.11",
+    "husky": "^8.0.3",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.5.0",
     "node-sass": "^8.0.0",
+    "postcss": "^8.4.21",
+    "prettier": "^2.8.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-test-renderer": "^18.2.0",
     "rollup": "^3.19.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-typescript2": "^0.34.1",
-    "sass-loader": "^13.2.0",
     "ts-jest": "^29.0.5",
     "typescript": "^4.9.5"
   },
   "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
-  }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "src/**/*.{css,scss,md,html,json}": [
+      "prettier --write"
+    ]
+  },
+  "dependencies": {}
 }
