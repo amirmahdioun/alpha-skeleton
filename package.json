@@ -1,5 +1,5 @@
 {
-  "name": "@alphamike/skeleton",
+  "name": "alphamike-skeleton",
   "version": "1.0.0",
   "description": "The skeleton app to show when the contents are loading to hint user \"hey!, something should be here and will be load as soon as possible. Expect it",
   "main": "build/index.js",
